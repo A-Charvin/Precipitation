@@ -7,7 +7,7 @@ This repository contains scripts for mapping and interpolating precipitation dat
 - `LICENSE`: The license for this project.
 - `README.md`: This file, containing information about this project.
 - `Map.png`: An image file related to the project.
-- `ws.py`: A Python script file.
+- `PDS.py`: A Python script file.
 - `ws.png` : The icon file.
 
 ## Setup
