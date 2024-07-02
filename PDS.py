@@ -5,7 +5,7 @@
 # This tool generates a shapefile based on the provided data        #
 #                                                                   #
 # Usage:                                                            #
-#   python WS.py                                                    #
+#   python PDS.py                                                   #
 #####################################################################
 
 import tkinter as tk
@@ -32,7 +32,7 @@ weather_stations = {
 class WeatherStationApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Weather Station Data Entry")
+        self.root.title("Precipitation Data Submission")
         
         # GUI Components
         self.create_widgets()
@@ -148,7 +148,7 @@ class WeatherStationApp:
         df = pd.DataFrame(self.data, columns=["Station", "Date", "Prec", "X", "Y"])
         gdf = gpd.GeoDataFrame(df, geometry=[Point(xy) for xy in zip(df.X, df.Y)], crs="EPSG:4326")
         
-        filepath = "weather_stations.shp"
+        filepath = "pds.shp"
         gdf.to_file(filepath)
         messagebox.showinfo("Success", f"Data successfully saved to {filepath}")
 
