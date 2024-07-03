@@ -15,7 +15,9 @@ The script follows these steps:
 The input point features should have a 'Date' field and a field for the values to be interpolated (specified by 'zField'). 
 The output is a set of rasters named "IDW" followed by the date, clipped to the specified boundary.
 
-Note: This script requires the ArcGIS Spatial Analyst extension.
+Note: This script requires the ArcGIS Spatial Analyst extension & Arcpy
+
+Created by : A.Charvin
 """
 
 import arcpy
@@ -46,7 +48,7 @@ print("Dates retrieved.")
 
 # Set the extent to the clip boundary
 arcpy.env.extent = arcpy.Describe(clipBoundary).extent
-print("Feature dataset created.")
+print("Clip Boundary Defined.")
 
 # Loop over each unique date
 for date in dates:
@@ -61,11 +63,14 @@ for date in dates:
     
     # Clip the output to the boundary using arcpy.management.Clip
     out_raster = "IDW{}".format(date.strftime('%m%d'))
-    arcpy.management.Clip(outIDW, "#", out_raster, clipBoundary, "#", "NONE", "NO_MAINTAIN_EXTENT") # Clipping does not seems to be working. Modify it as needed. May be using Mask Raster or something else.
+    arcpy.management.Clip(outIDW, "#", out_raster, clipBoundary, "#", "ClippingGeometry", "NO_MAINTAIN_EXTENT")
     # print("Output clipped to boundary.")
     
     # Delete the temporary layer
     arcpy.Delete_management("temp_layer")
     print("Temporary layer deleted.")
+
+    # Break to run this only once.
+    # break 
 
 print('End Time: ' + str(currentTime))
